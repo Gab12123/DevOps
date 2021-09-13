@@ -6,5 +6,5 @@ Readme of the Lab2 - DevOps
 
 ##Authors
 
-Yanis and Gabrielle
+Gabrielle
 

@@ -8,12 +8,12 @@ on:
 
 jobs:
   # CI part
-  test:
-    runs-on: ubuntu-latest
+ # test:
+  # runs-on: ubuntu-latest
     # Define `working-directory` if you application is in a subfolder
-    defaults:
-      run:
-        working-directory: userapi
+   # defaults:
+    #  run:
+     #   working-directory: DevOps
      # Service containers to run with `runner-job`
     services:
       # Label used to access the service container

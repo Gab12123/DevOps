@@ -45,6 +45,6 @@ jobs:
         uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "devopslab5heroku" #Must be unique in Heroku
+          heroku_app_name: "devops-korkmaz-saadi" #Must be unique in Heroku
           heroku_email: "gabrielle.korkmaz@gmail.com"
        

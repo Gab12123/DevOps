@@ -12,6 +12,11 @@ jobs:
 
     runs-on: ubuntu-latest
     
+    #indicating working directory 
+    defaults:
+      run:
+        working-directory: userapi
+        
     services: 
       # Label used to access the service container
       redis:

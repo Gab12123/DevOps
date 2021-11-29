@@ -45,11 +45,7 @@ jobs:
   
     needs: test # Requires CI part to be succesfully completed
     runs-on: ubuntu-latest
-    
-    #indicating working directory 
-    defaults:
-      run:
-        working-directory: userapi
+  
     
     steps: 
       - uses: actions/checkout@v2
@@ -59,4 +55,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "devops-korkmaz-saadi" #Must be unique in Heroku
           heroku_email: "gabrielle.korkmaz@gmail.com"
+          appdir: userapi
        

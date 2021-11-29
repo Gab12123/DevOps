@@ -46,6 +46,11 @@ jobs:
     needs: test # Requires CI part to be succesfully completed
     runs-on: ubuntu-latest
     
+    #indicating working directory 
+    defaults:
+      run:
+        working-directory: userapi
+    
     steps: 
       - uses: actions/checkout@v2
       - name: Deploy to Heroku

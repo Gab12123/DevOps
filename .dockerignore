@@ -1,0 +1,6 @@
+/.github/*
+Dockerfile
+README.md
+.gitignore
+package-lock.json
+CHANGELOG.md

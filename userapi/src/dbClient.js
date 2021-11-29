@@ -3,11 +3,8 @@ const configure = require('./configure')
 
 const config = configure()
 var client = redis.createClient({
-  host: config.redis.host,
-  port: config.redis.port,
-  retry_strategy: () => {
-    return new Error("Retry time exhausted")
-  }
+  host: process.env.REDIS_HOST || "127.0.0.1",
+  port: process.env.REDIS_PORT || 6379
 })
 
 process.on('SIGINT', function() {

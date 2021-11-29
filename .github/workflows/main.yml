@@ -54,7 +54,7 @@ jobs:
     steps: 
       - name : subTree
         run : |
-          git subtree push --prefix userapi heroku master
+          git subtree push --prefix /userapi heroku master
       - uses: actions/checkout@v2
       - name: Deploy to Heroku
         uses: AkhileshNS/heroku-deploy@v3.12.12

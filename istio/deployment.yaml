@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs
+  labels:
+    app: nodejs-app
+spec:
+  selector:
+      matchLabels:
+        app: nodejs-app
+  template:
+    metadata:
+      labels:
+        app: nodejs-app
+    spec:
+      containers:
+      - name: nodejs-app
+        image: dockergkz/projectdevops:latest
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  labels:
+    app: redis
+spec:
+  selector:
+      matchLabels:
+        app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+      volumes:
+      - name: task-pv-storage
+        persistentVolumeClaim:
+          claimName: task-pv-claim

@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Welcome</title>
+  </head>
+  <body>
+    <center>
+      <h1>Welcome on your users' management platform ! </h1>
+      Enter a username:
+      <input type="text" id="username" /><br />
+      Enter the user's first name:
+      <input type="text" id="firstname" /><br />
+      Enter the user's last name:
+      <input type="text" id="lastname" /><br />
+      <input type="button" value="Submit" id="submit" /><br/><br/>
+      <a id="my-link" href="/allUsers">See all users!</a>
+    </center>
+  </body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+    jQuery(document).ready(function ($) {
+      $('#my-link').click();
+      $("#submit").click(function () {
+        let username = $("#username").val();
+        let firstname = $("#firstname").val();
+        let lastname = $("#lastname").val();
+      $.post(
+          "/addUser",
+          { username: username,firstname:firstname, lastname: lastname }
+        );
+      });
+    });
+  </script>
+</html>

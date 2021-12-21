@@ -7,7 +7,7 @@ services:
   web:
     depends_on: 
       - redis
-    image: myimage:latest
+    image: dockergkz/projectdevops:latest
     build: .
     ports:
       - "5000:3000"

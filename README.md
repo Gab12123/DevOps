@@ -1,11 +1,18 @@
-# User API web application
+# DevOps project
 
-It is a basic NodeJS web application exposing REST API that creates and stores user parameters in [Redis database](https://redis.io/).
+In this repository you will find all the work that we have done for this project.
 
-## Functionality
+## Brief
 
-1. Start a web server
-2. Create a user
+We have : 
+
+1. Created an app based on the lab4 correction with some new features
+2. Applied the CI/CD pipeline with deployment on heroku
+3. Applied IaC approach with Vagrant and Ansible
+4. Build a docker image of our app
+5. Made container orchestration with docker-compose and Kubernetes
+6. Deployed our app using Istio
+7. Monitored with Prometheus and Grafana
 
 ## Installation
 
@@ -64,5 +71,5 @@ npm test
 
 ## Author
 
-Sergei Kudinov   
-sergei@adaltas.com
+KORKMAZ Gabrielle - gabrielle.korkmaz@edu.ece.fr
+SAADI Yannis - yannis.saadi@edu.ece.fr

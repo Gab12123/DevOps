@@ -16,6 +16,39 @@ spec:
       containers:
       - name: nodejs-app
         image: dockergkz/projectdevops:latest
+        env: 
+        - name: REDIS_HOST
+          value: "10.104.105.200"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+      matchLabels:
+        app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      volumes:
+        - name: pv-volume
+          persistentVolumeClaim:
+            claimName: pv-claim
+      containers:
+      - name: redis
+        image: redis:latest
+        volumeMounts:
+          - name: pv-volume
+            mountPath: /data
+        ports:
+        - containerPort: 6379
+      
+
 
 
 

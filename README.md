@@ -2,7 +2,7 @@
 
 In this repository you will find all the work that we have done for this project.
 
-## Brief
+## Resume
 
 We have : 
 
@@ -17,7 +17,7 @@ We have :
 For each task realised, we are going to describe the installation, usage and obtained results.
 At the end, we will expose the encountered problems during this project and the bonuses that we have done.
 
-## Tasks' description
+## Tasks description
 
 ### 1. Create a web application
 
@@ -42,14 +42,14 @@ redis-server
 redis-cli
 ping
 ```
-If the server answer with *PONG*, it is working.
+If the server answers with *PONG*, it is working.
 
 2. Start the web server 
 ```bash
 npm start
 ```
 
-You should be able to access it on (http://localhost:3000)
+You should be able to access it on http://localhost:3000
 
 #### Obtained results
 
@@ -57,17 +57,17 @@ Once started, you should see this in your browser
 ![WebApp](images/webapp.png)
 
 You can create a user by completing the form and click on *submit*  
-If you want to see all the inserted users, click on *See all users!*  
-This will display them as JSON files as you can see bellow with an exemple of what has been done  
+If you want to see all the inserted users, click on *All Users*  in the navigation bar.  
+This will display them as a list :  
 ![WebAppUsers](images/webappusers.png)    
 
 So for every user input, the result is added to the existing list as a JSON format that we process to display it in a good way : 
 ```json
 {
-      "username": "usernameInput",
-      "firstname": "firstnameInput",
-      "lastname": "lastnameInput"
-   }
+  "username": "usernameInput",
+  "firstname": "firstnameInput",
+  "lastname": "lastnameInput"
+}
 ```
 
 > **Note :** The username is the key in the database. If you input a new user with an existing username, it will update the existing one and not create a new user.  
@@ -118,7 +118,7 @@ On every push, GitHub Actions will go through this script automatically.
 
 #### Obtained results  
 
-We can see the reults (those are the global results, if we go in detail we can see every step logs):     
+We can see the results (those are the global results, if we go in detail we can see every step logs):     
      
 ![Github Actions global result](images/githubactions.png)
 
@@ -133,7 +133,7 @@ Our app is available on heroku and you can access it via this **[link](https://d
 ### 3. Configure and provision a virtual environment and run your application using the IaC approach
 
 
-You must have virtualbox and Vagrant installed on your machine to proceed to this step. If your machine already has a vortualbox and Vagrant version, the next
+You must have virtualbox and Vagrant installed on your machine to proceed to this step. If your machine already has a virtualbox and Vagrant version, the next
 instuctions do not apply to you.
 
 #### Installations
@@ -166,14 +166,14 @@ vagrant provision
 
 ![vagrant_redis](images/vagrant_redis.png)
 
-You should be able to havea redis-server running on your vm (we configured it to start the redis server and tests as soon as it is provisionned), and run the test of the app using:
+You should be able to have a redis-server running on your vm (we configured it to start the redis server and tests as soon as it is provisionned), and run the test of the app using:
 
 ```bash
 vagrant ssh project-server
 npm install
 npm test
 ```
-The VM succeding the test should look like:
+The VM succeeding the test should look like:
 
 ![vagrant_test](images/vagrant_test.png)
 
@@ -215,7 +215,7 @@ docker run -p 12345:8080 dockergkz/projectdevops
 
 We created a [.dockerignore](.dockerignore) file so when we pull the image, we will need to redo npm install.  
   
-We were then able to run the app and access it on (http://localhost:12345) by mapping ports. However, you may have connections errors because redis is not on the same container. This is why we need container orcherstration.  
+We were then able to run the app and access it on http://localhost:12345 by mapping ports. However, you may have connections errors because redis is not on the same container. This is why we need container orchestration.  
 
 ### 5. Make container orchestration using Docker Compose
 
@@ -263,7 +263,7 @@ service/nodejs-services created
 service/redis-services created
 ```
 
-You have to get the services (*kubectl get services) and you should see something like this :  
+You have to get the services (*kubectl get services*) and you should see something like this :  
 ![K8S get services](images/k8sgetservices.png)
 
 Once obtained, you need to make sure that the **clusterIP address of the redis-server service is the same as in the environment variable of redis** in (k8s/deployment.yaml). If not replace it and re-apply *deployment.yaml*
@@ -279,13 +279,13 @@ kubectl get pvc
 
 #### Usage 
 
-Once everything is up and running (following the installation instructions), you can access the web app on (http://192.168.99.108:30001)
+Once everything is up and running (following the installation instructions), you can access the web app on http://192.168.99.108:30001
 
-> **Note!!** The address is compose of the minikube ip address, if you don't have the same, you should replace the link by *http://{YOUR-MINIKUBE-IP}:30001
+> **Note!!** The address is composed of the minikube ip address, if you don't have the same, you should replace the link by *http://{YOUR-MINIKUBE-IP}:30001
 
 #### Obtained results
 
-You make think that we have something similar to the previous container orchestration but no, it's better!  
+You may think that we have something similar to the previous container orchestration but no, it's better!  
 Thanks to pv and pvc, even if the pod stops and restart, you'll still have the users that were added earlier.  
 
 For example, we added a user "TEST", stopped the app and restarted it. We still had our user as you can see on this screenshot :  
@@ -333,7 +333,7 @@ istioctl dashboard kiali
 
 #### Obtained results
 
-On our dashboard, we can see the traffic and rout between 2 different versions of the app. 
+On our dashboard, we can see the traffic and route between 2 different versions of the app. 
 We can shift between them, in the following screenshot we directed everything on the latest version :  
 ![Kiali Dashboard](images/kialidashboard.png)  
   
@@ -356,8 +356,8 @@ We can shift between them, in the following screenshot we directed everything on
 
 ### Problems encountered
 
-Even if we succedded in the majority of the tasks that were necessary for this project, we encountered some problems that were showstoppers and blocked us.
-The main problem that we couldn"t avoid is that the computer stopped working or became really slow. For exemple, with minikube, it quickly lagged and no commands were possible. Sometimes I (Gabrielle) had to do 15 to 20 times the same command before it starts working again which imply that a little modification can take multiple hours to be tested and even sometimes it was impossible to test. 
+Even if we succeedded in the majority of the tasks that were necessary for this project, we encountered some problems that were showstoppers and blocked us.
+The main problem that we couldnt avoid is that the computer stopped working or became really slow. For example, with minikube, it quickly lagged and no commands were possible. Sometimes I (Gabrielle) had to do 15 to 20 times the same command before it starts working again which imply that a little modification can take multiple hours to be tested and even sometimes it was impossible to test. 
 Fortunately, Yannis' computer was able to support a little more those VMs which made it possible (but with a lot of difficulties) for us to go further in some tasks.
 
 ### Bonuses
@@ -369,7 +369,7 @@ As you can see on the screenshots above, we have two pages :
 
 - [The welcome page](/userapi/src/hello.html)
 It is an html page (styled with css) with a form. In this form we have the 3 needed fields : username, firstname and lastname.  
-To send the forme we used jQuery that posts the data to the route "addUser".  
+To send the form we used jQuery that posts the data to the route "addUser".  
 These infomartion are then treated in our [app](/userapi/src/index.js) with the following code : 
 
 ```javascript
@@ -384,7 +384,7 @@ app.post('/addUser', (req, res) => {
 ```
 - [See all users page](userapi/src/views/userslist.ejs)
 
-This page uses ejs (embedded javascript) to work. It is a templating language that make it possible to send data from our app to a HTML code and use it in the page.  
+This page uses ejs (embedded javascript) to work. It is a templating language that makes it possible to send data from our app to a HTML code and use it in the page.  
 
 We show our page with the *res.render* that is done after extracting all the users as JSON : 
 ```javascript
@@ -424,7 +424,7 @@ We can then use it in our ejs file like this :
 <% }) %>
 ```
 
-All the work that we have done to imporve the web app allowed us to learn new things (as ejs for example) and we realised how redis and express could interact without always using the CLI.
+All the work that we have done to improve the web app allowed us to learn new things (as ejs for example) and we realised how redis and express could interact without always using the CLI.
 
 ## Author
 

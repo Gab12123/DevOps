@@ -375,8 +375,8 @@ it should return an url, where you will find your Grafana dashboard.
 Result should look like this (we here count all the request to our app):
 
 ![Grafana_general](images/Grafana_general.png)  
-![Grafana_general](images/Grafana_client.png)  
-![Grafana_general](images/Grafana_service.png)  
+![Grafana_client](images/Grafana_client.png)  
+![Grafana_service](images/Grafana_service.png)  
 
 
 ### Problems encountered

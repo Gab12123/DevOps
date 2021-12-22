@@ -166,7 +166,9 @@ vagrant provision
 
 ![vagrant_redis](images/vagrant_redis.png)
 
-You should be able to have a redis-server running on your vm (we configured it to start the redis server as soon as it is provisionned), and run the test of the app using:
+This provision run a healcheck on our VM and install nodeJS, npm and redis, what is required to use the application on the VM.
+You should be able to have a redis-server running on your vm (we configured it to start the redis server as soon as it is provisionned), and run the test of the
+app using:
 
 ```bash
 vagrant ssh project-server

@@ -44,9 +44,9 @@ Vagrant.configure("2") do |config|
 $script = <<-SCRIPT
 
 cd userapi/
-npm install
+#npm install
 redis-server
-npm test
+#npm test
 
 SCRIPT
 

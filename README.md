@@ -59,7 +59,7 @@ Once started, you should see this in your browser
 You can create a user by completing the form and click on *submit*  
 If you want to see al the inserted users, click on *See all users!*  
 This will display them as JSON files as you can see bellow with an exemple of what has been done  
-![WebAppUsers](images/webappusers.png)
+![WebAppUsers](images/webappusers.png)  
 So for every user input, the result should be added to the existing list with this format : 
 ```json
 {

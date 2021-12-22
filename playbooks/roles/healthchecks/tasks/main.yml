@@ -1,0 +1,8 @@
+- name: Create Minimum HealthCheck
+  gcp_healthcheck:
+    service_account_email: "{{ service_account_email }}"
+    credentials_file: "{{ credentials_file }}"
+    project_id: "{{ project_id }}"
+    healthcheck_name: my-healthcheck
+    healthcheck_type: HTTP
+    state: present

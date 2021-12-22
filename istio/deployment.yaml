@@ -1,9 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nodejs
+  name: nodejs-v1
   labels:
     app: nodejs-app
+    version: v1
 spec:
   selector:
       matchLabels:
@@ -16,13 +17,41 @@ spec:
       containers:
       - name: nodejs-app
         image: dockergkz/projectdevops:latest
+        env: 
+        - name: REDIS_HOST
+          value: "10.106.230.227"
+
 ---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-v2
+  labels:
+    app: nodejs-app
+    version: v2
+spec:
+  selector:
+      matchLabels:
+        app: nodejs-app
+  template:
+    metadata:
+      labels:
+        app: nodejs-app
+    spec:
+      containers:
+      - name: nodejs-app
+        image: dockergkz/projectdevops:latest
+        env: 
+        - name: REDIS_HOST
+          value: "10.106.230.227"
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis
-  labels:
-    app: redis
 spec:
   selector:
       matchLabels:
@@ -32,10 +61,19 @@ spec:
       labels:
         app: redis
     spec:
+      volumes:
+        - name: pv-volume
+          persistentVolumeClaim:
+            claimName: pv-claim
       containers:
       - name: redis
         image: redis:latest
-      volumes:
-      - name: task-pv-storage
-        persistentVolumeClaim:
-          claimName: task-pv-claim
+        volumeMounts:
+          - name: pv-volume
+            mountPath: /data
+        ports:
+        - containerPort: 6379
+      
+
+
+

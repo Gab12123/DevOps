@@ -161,7 +161,7 @@ Then you can provision your VM if you run:
 ```bash
 vagrant provision
 ```
-![vagrant_provision](images/vagrant_provision.png)
+![vagrant_provision](images/vagrantprovision.png)
 
 ![vagrant_redis](images/vagrant_redis.png)
 

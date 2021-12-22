@@ -318,7 +318,7 @@ We can shift between them, in the following screenshot we directed everything on
 
 ## Author
 
-KORKMAZ Gabrielle - gabrielle.korkmaz@edu.ece.fr
+KORKMAZ Gabrielle - gabrielle.korkmaz@edu.ece.fr  
 SAADI Yannis - yannis.saadi@edu.ece.fr
 
 

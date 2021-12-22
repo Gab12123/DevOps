@@ -15,7 +15,7 @@ We have :
 7. Monitored with Prometheus and Grafana
 
 For each task realised, we are going to describe the installation, usage and obtained results.
-At the end, we will expose the encountered problems during this project.
+At the end, we will expose the encountered problems during this project and the bonuses that we have done.
 
 ## Tasks' description
 
@@ -59,8 +59,9 @@ Once started, you should see this in your browser
 You can create a user by completing the form and click on *submit*  
 If you want to see all the inserted users, click on *See all users!*  
 This will display them as JSON files as you can see bellow with an exemple of what has been done  
-![WebAppUsers](images/webappusers.png)  
-So for every user input, the result should be added to the existing list with this format : 
+![WebAppUsers](images/webappusers.png)    
+
+So for every user input, the result is added to the existing list as a JSON format that we process to display it in a good way : 
 ```json
 {
       "username": "usernameInput",
@@ -101,7 +102,7 @@ We also implemented new tests :
       ✓ can not get a user when it does not exis
 ```
 
-> **BONUS : All those features are bonuses that we have done to have a better user experience and enrich the given app.**  
+> **BONUS : All those features are bonuses that we have done to have a better user experience and enrich the given app. They are described at the end of this README.**  
 
 ### 2. Apply CI/CD pipeline 
 
@@ -234,18 +235,18 @@ We mapped the ports (redis : **5001** on local, **6379** in container - app: **5
 
 #### Obtained results
 
-When running *docker-compose up* in our terminal, everything starts as it should ad you can see on this screenshot : 
+When running *docker-compose up* in our terminal, everything starts as it should as you can see on this screenshot : 
 
 ![Docker compose terminal](images/docker-composeterminal.png)
 
-Once again, when we access it we see our welcome page and this time it is working! We can add and see users as done in part 1 on our local machine.   
+Once again, when we access it we see our welcome page. This time it is working! We can add and see users as done in part 1 on our local machine.   
 
 ### 6. Make docker orchestration using Kubernetes
 
 #### Installation
 
 First, you will need to start minikube with a kubernetes version. 
-This is the settings that we used but you can change the memory, cpu and k8s vesion with what you have/want :
+Those are the settings that we used but you can change the memory, cpu and k8s vesion with what you have/want :
 
 ```bash
 minikube start --memory=4096 --cpus=2 --kubernetes-version=v1.22.2
@@ -262,10 +263,10 @@ service/nodejs-services created
 service/redis-services created
 ```
 
-Then you have to get the services and should see something like this :  
+You have to get the services (*kubectl get services) and you should see something like this :  
 ![K8S get services](images/k8sgetservices.png)
 
-Once obtained, you need to make sure that the clusterIP address of the redis-server service is the same as in the environment variable of redis in (k8s/deployment.yaml). If not replace it and re-apply *deployment.yaml*
+Once obtained, you need to make sure that the **clusterIP address of the redis-server service is the same as in the environment variable of redis** in (k8s/deployment.yaml). If not replace it and re-apply *deployment.yaml*
 
 When you get pods, you should obtain : 
 ![K8S get pods](images/k8sgetpods.png)
@@ -287,7 +288,7 @@ Once everything is up and running (following the installation instructions), you
 You make think that we have something similar to the previous container orchestration but no, it's better!  
 Thanks to pv and pvc, even if the pod stops and restart, you'll still have the users that were added earlier.  
 
-For example, we added a user "TEST", stopped the app and restarted it, we stille had our user as you can see on this screenshot :  
+For example, we added a user "TEST", stopped the app and restarted it. We still had our user as you can see on this screenshot :  
 ![K8S volume working](images/volumeuser.png)
 
 ### 7. Make a service mesh using Istio
@@ -355,7 +356,75 @@ We can shift between them, in the following screenshot we directed everything on
 
 ### Problems encountered
 
+Even if we succedded in the majority of the tasks that were necessary for this project, we encountered some problems that were showstoppers and blocked us.
+The main problem that we couldn"t avoid is that the computer stopped working or became really slow. For exemple, with minikube, it quickly lagged and no commands were possible. Sometimes I (Gabrielle) had to do 15 to 20 times the same command before it starts working again which imply that a little modification can take multiple hours to be tested and even sometimes it was impossible to test. 
+Fortunately, Yannis' computer was able to support a little more those VMs which made it possible (but with a lot of difficulties) for us to go further in some tasks.
 
+### Bonuses
+
+As a bonus, we implemented new tests and features with a friendly interface to the app.  
+Now, you can add users directly from it and access to all the users in the database on the app which was not possible before. 
+
+As you can see on the screenshots above, we have two pages : 
+
+- [The welcome page](/userapi/src/hello.html)
+It is an html page (styled with css) with a form. In this form we have the 3 needed fields : username, firstname and lastname.  
+To send the forme we used jQuery that posts the data to the route "addUser".  
+These infomartion are then treated in our [app](/userapi/src/index.js) with the following code : 
+
+```javascript
+app.post('/addUser', (req, res) => {
+  const {username, firstname, lastname} = req.body
+  client.set(username, JSON.stringify({
+    username : username,
+    firstname : firstname,
+    lastname: lastname,
+  }))
+}) 
+```
+- [See all users page](userapi/src/views/userslist.ejs)
+
+This page uses ejs (embedded javascript) to work. It is a templating language that make it possible to send data from our app to a HTML code and use it in the page.  
+
+We show our page with the *res.render* that is done after extracting all the users as JSON : 
+```javascript
+app.get('/allUsers', (req, res) => {
+  client.keys('*',(err, keysUsers)=>{
+    if(keysUsers){
+      const allUsers = []
+      async.map(keysUsers, function(user,callB){
+        client.get(user, function(err, result){
+          if(err) return console.log(err)
+          var userInfo = {}
+          userInfo['username'] = user
+          userInfo['firstname'] = JSON.parse(result).firstname
+          userInfo['lastname'] = JSON.parse(result).lastname
+          callB(null, userInfo)
+        })
+      }, function(error, finalResults){
+        if(error) return console.log(error)
+        const users= finalResults
+        res.render('userslist', {users: users})
+      })
+    }else{
+      res.send('No users')
+    }
+  })
+})
+```  
+
+We can then use it in our ejs file like this :  
+``ejs
+<% users.forEach((user) => { %>
+  <div class=userDiv>
+    <h4 ><%= user.username %></h4>
+    <h5 >Firstname : <%= user.firstname %></h5>
+    <h5 >Lastname : <%= user.lastname %></h5>
+  </div>
+<% }) %>
+```
+
+All the work that we have done to imporve the web app allowed us to learn new things (as ejs for example) and we realised how redis and express could interact without always using the CLI.
 
 ## Author
 

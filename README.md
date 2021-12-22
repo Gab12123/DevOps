@@ -36,7 +36,7 @@ npm install
 
 #### Usage 
 
-1. Start the redis server and test if it is workking with those commands
+1. Start the redis server and test if it is working with those commands
 ```bash
 redis-server
 redis-cli
@@ -49,7 +49,7 @@ If the server answer with *PONG*, it is working.
 npm start
 ```
 
-You should be able to acces is on (http://localhost:3000)
+You should be able to access it on (http://localhost:3000)
 
 #### Obtained results
 
@@ -57,7 +57,7 @@ Once started, you should see this in your browser
 ![WebApp](images/webapp.png)
 
 You can create a user by completing the form and click on *submit*  
-If you want to see al the inserted users, click on *See all users!*  
+If you want to see all the inserted users, click on *See all users!*  
 This will display them as JSON files as you can see bellow with an exemple of what has been done  
 ![WebAppUsers](images/webappusers.png)
 So for every user input, the result should be added to the existing list with this format : 
@@ -105,7 +105,7 @@ We also implemented new tests :
 
 ### 2. Apply CI/CD pipeline 
 
-#### Instalation  
+#### Installation  
 
 We configured a CI/CD pipeline using GitHub Actions and Heroku.
 
@@ -117,7 +117,7 @@ On every push, GitHub Actions will go through this script automatically.
 
 #### Obtained results  
 
-We can see the reults (those are the glabal results, if we go in detail we can see every step logs):     
+We can see the reults (those are the global results, if we go in detail we can see every step logs):     
      
 ![Github Actions global result](images/githubactions.png)
 
@@ -125,9 +125,9 @@ On Heroku, we can as well see the deployments:
    
 ![Heroku global result](images/heroku.png)
 
-Our app is available on heroku and you can acces it via this **[link](https://devops-korkmaz-saadi.herokuapp.com)**    
+Our app is available on heroku and you can access it via this **[link](https://devops-korkmaz-saadi.herokuapp.com)**    
 
-> **Note :** Only the display of homepage will work because we don't have the subscription to user their datbase services
+> **Note :** Only the display of homepage will work because we don't have the subscription to user their database services
 
 ### 3. Configure and provision a virtual environment and run your application using the IaC approach
 
@@ -176,7 +176,7 @@ docker run -p 12345:8080 dockergkz/projectdevops
 
 We created a [.dockerignore](.dockerignore) file so when we pull the image, we will need to redo npm install.  
   
-We were then able to run the app and access it on (http://localhost:12345)  by mapping ports. However, you may have connections errors because redis is not on the same container. This is why we need container orcherstration.  
+We were then able to run the app and access it on (http://localhost:12345) by mapping ports. However, you may have connections errors because redis is not on the same container. This is why we need container orcherstration.  
 
 ### 5. Make container orchestration using Docker Compose
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Node.js Blog</title>
+    <style>
+    .mainDiv{
+      margin-top: 5%;
+    }
+    .topnav {
+      overflow: hidden;
+      background-color: #1D3557;
+      height: 4vw;
+      position: fixed;
+      top : 0px;
+      z-index: 3;
+      width: 110%;
+      margin-left: -10px;
+    }
+    .topnav a {
+      color: #f2f2f2;
+      text-align: center;
+      padding-top: 5px;
+      text-decoration: none;
+      font-size: 1.5vw;
+      width: 10%;
+      height: 2vw;
+      margin-top: 1vw;
+      border-left: solid;
+      border-left-color:  white;
+      border-left-width: 1px;
+      float: left;
+    }
+    .topnav a:hover {
+      font-size: 1.7vw;
+    }
+
+    .topnav a.active{
+      font-weight: bold;
+      float: left;
+    }
+    .userDiv{
+        border-radius: 5px;
+        width: 70%;
+        background-color: #8fb8f1;
+        border-color: #1D3557;
+        border: 2px solid;
+    }
+    </style>
+</head>
+<body>
+  <div class="topnav">
+    <a  href="/">Add User</a>
+    <a class = "active">All users</a>
+  </div>   
+  <center>
+    <div class="mainDiv">
+        <div>
+            <h1>List of all users</h1>
+            <p>Find all your users here !</p>
+        </div>
+        <!-- loop over blog posts and render them -->
+        <% users.forEach((user) => { %>
+            <div class=userDiv>
+                <h4 class="list-group-item-heading"><%= user.username %></h4>
+                <h5 class="list-group-item-heading">Firstname : <%= user.firstname %></h5>
+                <h5 class="list-group-item-heading">Lastname : <%= user.lastname %></h5>
+            </div>
+            <br>
+            <br>
+        <% }) %>
+    </div>
+  </center>
+</body>
+</html>

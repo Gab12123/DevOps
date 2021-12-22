@@ -15,6 +15,10 @@ const user = {
   lastname: 'Korkmaz'
 }
 
+var path = require('path');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 app.use(bodyParser.urlencoded({
   extended: false
 }))
@@ -35,8 +39,8 @@ app.get('/allUsers', (req, res) => {
         })
       }, function(error, finalResults){
         if(error) return console.log(error)
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify(finalResults, null, 3));
+        const users= finalResults
+        res.render('userslist', {users: users})
       })
     }else{
       res.send('No users')
@@ -51,7 +55,7 @@ app.post('/addUser', (req, res) => {
     firstname : firstname,
     lastname: lastname,
   }))
-})
+}) 
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + "/hello.html")

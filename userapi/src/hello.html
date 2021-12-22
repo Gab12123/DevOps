@@ -2,18 +2,100 @@
   <head>
     <title>Welcome</title>
   </head>
+  <style>
+    body {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .topnav {
+      overflow: hidden;
+      background-color: #1D3557;
+      height: 4vw;
+      position: fixed;
+      top : 0px;
+      z-index: 3;
+      width: 110%;
+      margin-left: -10px;
+    }
+    .topnav a {
+      color: #f2f2f2;
+      text-align: center;
+      padding-top: 5px;
+      text-decoration: none;
+      font-size: 1.5vw;
+      width: 10%;
+      height: 2vw;
+      margin-top: 1vw;
+      border-left: solid;
+      border-left-color:  white;
+      border-left-width: 1px;
+      float: left;
+    }
+    .topnav a:hover {
+      font-size: 1.7vw;
+    }
+
+    .topnav a.active{
+      font-weight: bold;
+      float: left;
+    }
+    .mainDiv{
+      margin-top: 5%;
+    }
+    input[type=reset] {
+      width: 20%;
+      background-color: #696a85;
+      color: white;
+      font-weight: bold;
+      font-size: 1em;
+      border-radius: 7px;
+      height: 2em;
+    }
+    input[type=reset]:hover {
+      background-color: #323233;
+    }
+    input[type=submit] {
+      width: 20%;
+      background-color: #070ac5;
+      color: white;
+      font-weight: bold;
+      font-size: 1em;
+      border-radius: 7px;
+      height: 2em;
+    }
+    input[type=submit]:hover {
+      background-color: #04065f;
+    }
+    input[type=text], select {
+      width: 20%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    </style>
   <body>
+    <div class="topnav">
+      <a  class = "active">Add User</a>
+      <a href="/allUsers">All users</a>
+  </div>  
+  <div class="mainDiv">
+    <form>
     <center>
       <h1>Welcome on your users' management platform ! </h1>
-      Enter a username:
-      <input type="text" id="username" /><br />
-      Enter the user's first name:
-      <input type="text" id="firstname" /><br />
-      Enter the user's last name:
-      <input type="text" id="lastname" /><br />
-      <input type="button" value="Submit" id="submit" /><br/><br/>
-      <a id="my-link" href="/allUsers">See all users!</a>
+      <label for="username">Username</label><br/>
+      <input type="text" id="username" name="username" placeholder="New user's username..."><br/>
+      <label for="firstname">First Name</label><br/>
+      <input type="text" id="firstname" name="firstname" placeholder="New user's firstname..."><br/>
+      <label for="lastname">Last Name</label><br/>
+      <input type="text" id="lastname" name="lastname" placeholder="New user's lastname..."><br/>
+      <input type="reset" value="Reset"/><br/><br/>
+      <input type="submit" value="ADD" id="submit" /><br/><br/>
+    </form>
     </center>
+  </div>
   </body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script>
@@ -25,7 +107,7 @@
         let lastname = $("#lastname").val();
       $.post(
           "/addUser",
-          { username: username,firstname:firstname, lastname: lastname }
+          { username: username, firstname:firstname, lastname: lastname }
         );
       });
     });

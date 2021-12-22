@@ -414,7 +414,7 @@ app.get('/allUsers', (req, res) => {
 ```  
 
 We can then use it in our ejs file like this :  
-``ejs
+```html
 <% users.forEach((user) => { %>
   <div class=userDiv>
     <h4 ><%= user.username %></h4>

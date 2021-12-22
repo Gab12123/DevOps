@@ -166,7 +166,7 @@ vagrant provision
 
 ![vagrant_redis](images/vagrant_redis.png)
 
-You should be able to have a redis-server running on your vm (we configured it to start the redis server and tests as soon as it is provisionned), and run the test of the app using:
+You should be able to have a redis-server running on your vm (we configured it to start the redis server as soon as it is provisionned), and run the test of the app using:
 
 ```bash
 vagrant ssh project-server
@@ -339,20 +339,45 @@ We can shift between them, in the following screenshot we directed everything on
   
     
 ### 8. Implement Monitoring to your containerized application
+At the end of the previous step, you should have a K8s cluster running, do not delete it, simply follow these instructions to be able to monitore your app.
 
-1. Install Prometheus and Grafana to your K8s cluster
+#### Install Prometheus and Grafana to your K8s cluster
 
-2. Set up monitoring with Prometheus:
+```bash
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.12/samples/addons/prometheus.yaml
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.12/samples/addons/grafana.yaml
+```
+#### Start monitoring
 
-  - Prometheus should contact the application (eg. homepage) and pull its status
-  - You should be able to see the status of the application on Prometheus
+To start your prometheus dashboard, run:
+```bash
+istioctl dashboard prometheus
+```
+it should return an url, where you will find your Prometheus Graph.
+Then click to the right of Prometheus in the header.
+Execute a Prometheus query.
 
-3. Set up monitoring with Grafana:
+In the “Expression” input box at the top of the web page, enter the text:
+```bash
+istio_requests_total
+```
 
-  - Link it to the Prometheus server and display the monitored applications
-  - Create alerts and trigger them by shutting down your applications.
+Result should look like this (we here count all the request to our app):
 
-> Note. You can imagine something different and set up monitoring (eg. memory usage, CPU time, ...)
+![Prometheus_dashboard](images/Prometheus_dashboard.png)  
+
+To start your Grafana monitore, run:
+```bash
+istioctl dashboard grafana
+```
+it should return an url, where you will find your Grafana dashboard.
+
+Result should look like this (we here count all the request to our app):
+
+![Grafana_general](images/Grafana_general.png)  
+![Grafana_general](images/Grafana_client.png)  
+![Grafana_general](images/Grafana_service.png)  
+
 
 ### Problems encountered
 

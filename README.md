@@ -109,7 +109,7 @@ We also implemented new tests :
 
 We configured a CI/CD pipeline using GitHub Actions and Heroku.
 
-This workflow is available [here](.githube/workflows/main.yml)
+This workflow is available [here](.github/workflows/main.yml)
 
 #### Usage 
 
@@ -131,14 +131,52 @@ Our app is available on heroku and you can access it via this **[link](https://d
 
 ### 3. Configure and provision a virtual environment and run your application using the IaC approach
 
-1. Configure with Vagrant: 1 VM running on any Linux distribution 
-2. Provision the VM with Ansible, which includes installing and running:
-  - language runtime
-  - database
-  - your application (use [sync folders](https://www.vagrantup.com/docs/synced-folders))
-  - health check of your application
 
-  
+You must have virtualbox and Vagrant installed on your machine to proceed to this step. If your machine already has a vortualbox and Vagrant version, the next
+instuctions do not apply to you.
+
+#### Installations
+
+1. Install VirtualBox - https://www.virtualbox.org/wiki/Downloads
+2. Install Vagrant on your computer - https://www.vagrantup.com/downloads.html
+3. Download the centos/7 Vagrant box for the Virtualbox provider, run:
+
+```bash
+vagrant box add centos/7
+```
+(Choose the third option: virtualbox)
+
+#### Vagrant usage
+
+To start your Vagrant, you must be in the folder [DevOps](DevOps/) and run:
+```bash
+vagrant up
+```
+result should be:
+
+![vagrant_up](images/vagrantup.png)
+
+Then you can provision your VM if you run:
+
+```bash
+vagrant provision
+```
+![vagrant_provision](images/vagrant_provision.png)
+
+![vagrant_redis](images/vagrant_redis.png)
+
+You should be able to havea redis-server running on your vm (we configured it to start the redis server and tests as soon as it is provisionned), and run the test of the app using:
+
+```bash
+vagrant ssh project-server
+npm install
+npm test
+```
+The VM succeding the test should look like:
+
+![vagrant_test](images/vagrant_test.png)
+
+
 ### 4. Build Docker image of your application & push it to Docker Hub
 
 #### Installation  
